@@ -36,7 +36,7 @@ def run():
         if len(rule_reject_df) > 0:
             load_rejects(rule_reject_df, source_name=source["name"], reason="business_rule_failed")
 
-        # 3.5) CLEANING step (new)
+        # CLEANING step (new)
         clean_df = clean_fashion_sales(rule_valid_df)
         print(f"   After cleaning: {len(clean_df)} rows ready for load")
         
