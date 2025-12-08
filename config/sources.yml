@@ -1,0 +1,23 @@
+defaults:
+  #db_url: postgresql+psycopg://postgres:coca cola@localhost:5432/etl_project
+  db_url: postgresql+psycopg2://postgres:coca cola@localhost:5432/etl_project
+  batch_size: 5000
+  on_conflict: upsert
+
+sources:
+  - name: fashion_sales_csv
+    type: csv
+    path: data/Fashion_Retail_Sales_Small_test.csv
+    target_table: stg_fashion_sales
+    pk: [customer reference id]   # we’ll maybe change this later if needed
+    schema:
+      customer reference id: int
+      item purchased: str
+      purchase amount (usd): float
+      date purchase: datetime
+      review rating: float
+      payment method: str
+    rules:
+      - rule: "purchase amount (usd) >= 0"
+      - rule: "review rating BETWEEN 0 AND 5"      # but allow NULL
+      - rule: "payment method IN ('Cash','Credit Card')"
