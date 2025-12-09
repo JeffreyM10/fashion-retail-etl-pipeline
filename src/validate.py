@@ -79,6 +79,14 @@ def apply_business_rules(df):
     if "payment method" in df.columns:
         allowed = ["Cash", "Credit Card"]
         bad_mask |= ~df["payment method"].isin(allowed)
+        
+    # 4) item purchased cannot be empty/blank
+    if "item purchased" in df.columns:
+        empty_item = (
+            df["item purchased"].isna()
+            | (df["item purchased"].astype("string").str.strip() == "")
+        )
+        bad_mask |= empty_item
 
     reject_df = df[bad_mask].reset_index(drop=True)
     valid_df = df[~bad_mask].reset_index(drop=True)

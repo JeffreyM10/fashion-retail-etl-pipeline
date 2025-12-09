@@ -1,4 +1,4 @@
-from src.config import load_sources_config
+from src.config import *
 from src.reader import read_csv
 from src.validate import *
 from src.load import *
@@ -40,9 +40,11 @@ def run():
         clean_df = clean_fashion_sales(rule_valid_df)
         print(f"   After cleaning: {len(clean_df)} rows ready for load")
         
-        # Load Valid rows into PostGresSQl
         table_name = source["target_table"]  # "stg_fashion_sales"
-        load_fashion_sales(rule_valid_df, table_name)
+        
+        # Use dataset-specific loader with UPSERT
+        load_fashion_sales_upsert(clean_df, table_name)
+
         
         
 if __name__ == "__main__":
