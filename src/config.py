@@ -1,7 +1,11 @@
 import yaml
+import os
 from pathlib import Path
+from dotenv import load_dotenv
+
 
 CONFIG_PATH = Path(__file__).parent.parent / "config" / "sources.yml"
+load_dotenv()
 
 def load_sources_config():
     """
@@ -13,8 +17,7 @@ def load_sources_config():
     return data
 
 def get_db_url():
-    """
-    Convenience helper to fetch the database URL from YAML.
-    """
-    cfg = load_sources_config()
-    return cfg["defaults"]["db_url"]
+    db_url = os.getenv("DB_URL")
+    if not db_url:
+        raise ValueError("DB_URL not set. Please create a .env file.")
+    return db_url

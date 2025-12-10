@@ -1,6 +1,4 @@
 defaults:
-  #db_url: postgresql+psycopg://postgres:coca cola@localhost:5432/etl_project
-  db_url: postgresql+psycopg2://postgres:coca cola@localhost:5432/etl_project
   batch_size: 5000
   on_conflict: upsert
 
