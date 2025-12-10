@@ -60,6 +60,7 @@ def apply_schema_casts(df, schema: dict):
 
     return valid_df, reject_df
 
+
 def apply_business_rules(df):
     df = df.copy()
     # Start with all rows marked as good (False = not bad)

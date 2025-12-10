@@ -7,9 +7,9 @@ defaults:
 sources:
   - name: fashion_sales_csv
     type: csv
-    path: data/Fashion_Retail_Sales_Small_test.csv
+    path: data/Fashion_Retail_Sales.csv
     target_table: stg_fashion_sales
-    pk: [customer reference id]   # we’ll maybe change this later if needed
+    pk: [customer reference id]   #maybe change this later if needed
     schema:
       customer reference id: int
       item purchased: str
@@ -19,5 +19,5 @@ sources:
       payment method: str
     rules:
       - rule: "purchase amount (usd) >= 0"
-      - rule: "review rating BETWEEN 0 AND 5"      # but allow NULL
+      - rule: "review rating BETWEEN 0 AND 5"      # but it will allow NULL
       - rule: "payment method IN ('Cash','Credit Card')"

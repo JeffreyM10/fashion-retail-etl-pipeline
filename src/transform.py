@@ -1,5 +1,6 @@
 import pandas as pd
 
+#drop the duplicates before we insert the data to the DB
 def to_dim_customer(df: pd.DataFrame) -> pd.DataFrame:
     return (
         df[["customer reference id"]]

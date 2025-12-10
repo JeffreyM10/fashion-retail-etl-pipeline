@@ -1,4 +1,3 @@
-
 import json
 import pandas as pd
 from sqlalchemy import create_engine, MetaData, Table
@@ -6,6 +5,9 @@ from sqlalchemy.dialects.postgresql import insert
 from datetime import datetime
 from sqlalchemy import text
 from src.config import get_db_url
+from src.logs.logging_config import *
+
+logger = get_logger(__name__)
 
 # Mapping from CSV column names -> DB column names
 FASHION_COL_RENAME = {
@@ -32,7 +34,7 @@ def load_rejects(reject_df: pd.DataFrame, source_name: str, reason: str) -> None
       - rejected_at timestamp
     """
     if reject_df.empty:
-        print("   No rejected rows to log.")
+        logger.info("   No rejected rows to log.")
         return
 
     engine = get_engine()
@@ -59,7 +61,7 @@ def load_rejects(reject_df: pd.DataFrame, source_name: str, reason: str) -> None
         method="multi",
     )
 
-    print(f"   Logged {len(log_df)} rejected rows to stg_rejects ({reason}).")
+    logger.info(f"   Logged {len(log_df)} rejected rows to stg_rejects ({reason}).")
 
 
 def upsert_dataframe(df: pd.DataFrame, table_name: str, pk_cols: list[str]) -> None:
@@ -72,7 +74,7 @@ def upsert_dataframe(df: pd.DataFrame, table_name: str, pk_cols: list[str]) -> N
       - df has already been cleaned / deduplicated on pk_cols in the transform step
     """
     if df.empty:
-        print(f"   No rows to upsert into {table_name}.")
+        logger.debug(f"   No rows to upsert into {table_name}.")
         return
 
     engine = get_engine()
@@ -107,7 +109,7 @@ def upsert_dataframe(df: pd.DataFrame, table_name: str, pk_cols: list[str]) -> N
     with engine.begin() as conn:
         conn.execute(stmt)
 
-    print(f"   UPSERTED {len(trimmed_df)} rows into {table_name}.")
+    logger.debug(f"   UPSERTED {len(trimmed_df)} rows into {table_name}.")
 
 
 
@@ -120,7 +122,7 @@ def load_fashion_sales_upsert(df: pd.DataFrame, table_name: str) -> None:
       (customer_reference_id, item_purchased, date_purchase)
     """
     if df.empty:
-        print("   No rows to load (fashion sales).")
+        logger.debug("   No rows to load (fashion sales).")
         return
 
     # Rename columns to match DB schema
@@ -175,7 +177,7 @@ def load_rejects(df: pd.DataFrame, source_name: str, reason: str):
         chunksize=1000,
     )
 
-    print(f"   Logged {len(rejects_df)} rejected rows to stg_rejects ({reason})")
+    logger.debug(f"   Logged {len(rejects_df)} rejected rows to stg_rejects ({reason})")
     
 
 
