@@ -132,3 +132,21 @@
 2025-12-10 18:39:05,748 | INFO | __main__ | Valid after rules: 2487
 2025-12-10 18:39:05,748 | INFO | __main__ | Loaded into DB: 2485
 2025-12-10 18:39:05,748 | INFO | __main__ | Runtime: 1.33 seconds
+2025-12-10 22:37:46,725 | INFO | __main__ | 
+--- RUN SUMMARY ---
+2025-12-10 22:37:46,725 | INFO | __main__ | Source: fashion_sales_csv
+2025-12-10 22:37:46,725 | INFO | __main__ | Loaded (raw): 3400
+2025-12-10 22:37:46,725 | INFO | __main__ | Valid after cast: 2487
+2025-12-10 22:37:46,725 | INFO | __main__ | Rejected rows: 913
+2025-12-10 22:37:46,725 | INFO | __main__ | Valid after rules: 2487
+2025-12-10 22:37:46,725 | INFO | __main__ | Loaded into DB: 2485
+2025-12-10 22:37:46,725 | INFO | __main__ | Runtime: 0.91 seconds
+2025-12-10 22:54:11,720 | INFO | __main__ | 
+--- RUN SUMMARY ---
+2025-12-10 22:54:11,720 | INFO | __main__ | Source: fashion_sales_csv
+2025-12-10 22:54:11,720 | INFO | __main__ | Loaded (raw): 3400
+2025-12-10 22:54:11,720 | INFO | __main__ | Valid after cast: 2487
+2025-12-10 22:54:11,720 | INFO | __main__ | Rejected rows: 913
+2025-12-10 22:54:11,720 | INFO | __main__ | Valid after rules: 2487
+2025-12-10 22:54:11,720 | INFO | __main__ | Loaded into DB: 2485
+2025-12-10 22:54:11,720 | INFO | __main__ | Runtime: 0.75 seconds
